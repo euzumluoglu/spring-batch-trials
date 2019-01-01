@@ -1,0 +1,29 @@
+
+# create and drop tables and sequences, loads import.sql
+spring:
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5454/global
+    username: global
+    password: global
+#    driver:
+#      class: oracle.jdbc.driver.OracleDriver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update #create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        temp.use_jdbc_metadata_defaults: false
+  batch:
+    initialize-schema: always
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: rabbitmq
+    password: rabbitmq
+
+jsa:
+  rabbitmq:
+    queue: jsa.queue.durable.logs
