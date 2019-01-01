@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  # redis:
+  #   image: redis:latest
+  global-postgresql:
+    image: postgres:10-alpine
+    ports:
+      - "5454:5432"
+    environment:
+      POSTGRES_USER: "global"
+      POSTGRES_PASSWORD: "global"
+      POSTGRES_DB: "global"
+  rabbit1:
+    image: "rabbitmq:3-management"
+    hostname: "rabbit1"
+    environment:
+      RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+      RABBITMQ_DEFAULT_USER: "rabbitmq"
+      RABBITMQ_DEFAULT_PASS: "rabbitmq"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+    labels:
+      NAME: "rabbitmq1"
